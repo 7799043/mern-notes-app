@@ -1,102 +1,34 @@
-// import React, { useState } from 'react'
-// import { Button } from 'react-bootstrap';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
-// import { Link } from "react-router-dom";
-// import '../../pages/style.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
+function BasicExample() {
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
 
-// function Header() {
-//   const [expand, updateExpanded] = useState(false);
-//   const [navColour, updateNavbar] = useState(false);
-
-//   function scrollHandler() {
-//     if (window.scrollY >= 20) {
-//       updateNavbar(true);
-//     } else {
-//       updateNavbar(false);
-//     }
-//   }
-
-//   window.addEventListener("scroll", scrollHandler);
-
-//   return (
-//     <Navbar expanded={expand}
-//       fixed="top"
-//       expand="md"
-//       className={navColour ? "sticky" : "navbar"}>
-
-
-// <Navbar.Brand className='logotext' as={Link} to='/'>
-//         <div className='logo'></div>
-//       </Navbar.Brand>
-
-//       <Navbar.Toggle className='navbar-toggler' aria-controls="responsive-navbar-nav"
-//         onClick={() => {
-//           updateExpanded(expand ? false : "expanded");
-//         }}
-//       >
-//         <span></span>
-//         <span></span>
-//         <span></span>
-//       </Navbar.Toggle>
-//       <Navbar.Collapse id="responsive-navbar-nav" className='responsive-navbar'>
-
-//         <Nav className="ms-auto" defaultActiveKey="#home">
-
-
-//           <Nav.Item>
-//             <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}> Home </Nav.Link>
-//           </Nav.Item>
-//           <Nav.Item>
-//             <Nav.Link
-//               as={Link}
-//               to="/about"
-//               onClick={() => updateExpanded(false)}
-//             >
-//               About
-//             </Nav.Link>
-//           </Nav.Item>
-//           <Nav.Item>
-//             <Nav.Link
-//               as={Link}
-//               to="/project"
-//               onClick={() => updateExpanded(false)}
-//             >
-//               Projects
-//               </Nav.Link>
-//           </Nav.Item>
-//               <Nav.Item>
-//             <Nav.Link
-//               as={Link}
-//               to="/certificates"
-//               onClick={() => updateExpanded(false)}
-//             >
-//               Certificates
-         
-//             </Nav.Link>
-//           </Nav.Item>
-//           <Nav.Item>
-//             <Nav.Link
-//               as={Link}
-//               to="/contact"
-//               onClick={() => updateExpanded(false)}
-//             >
-//               Contact
-//             </Nav.Link>
-//           </Nav.Item>
-
-//           <Button
-//             onClick={() => {
-//               window.open("https://drive.google.com/file/d/1yIemkOtxOYDjV5EqyLGkarWjBFzALvOJ/view?usp=sharing");
-//             }}
-//             className='resumebtn'><span>CV</span>
-//           </Button>
-//         </Nav>
-//       </Navbar.Collapse>
-
-//     </Navbar>
-//   );
-// }
-
-// export default Header;
+export default BasicExample;
