@@ -1,9 +1,10 @@
-const userCtrl ={
-   reisterUser: (req,res) => {
+const userCtrl = {
+   registerUser: (req,res) => {
         res.json({msg: "sign up succ"})
     },
     loginUser: (req,res) => {
     res.json({msg: "Login a User"})
+    }   
 }
-}
+
 module.exports=userCtrl

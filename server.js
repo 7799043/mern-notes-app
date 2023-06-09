@@ -11,7 +11,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Routes
+// // Routes
 app.use('/users', userRouter)
 app.use('/api/notes', noteRouter)
 
@@ -31,7 +31,7 @@ mongoose.connect(URI, {
     useUnifiedTopology: true 
 })
     .then(() => {
-        console.log('Successfully Connected');
+        console.log('Successfully Connected to MongoDB');
     })
     .catch((error) => {
         console.error('Error:', error);
