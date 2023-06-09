@@ -24,20 +24,14 @@ app.listen(PORT, () => {
 
 // Connect to MongoDB
 const URI = process.env.MONGODB_URL
-// mongoose.connect(URI, {
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }, err =>{
-//     if(err) throw err;
-//     console.log('Connected to MongoDB')
-// })
 
-mongoose.connect(URI)
+mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
     .then(() => {
         console.log('Successfully Connected');
     })
-    .catch(() => {
-        console.error('Error');
+    .catch((error) => {
+        console.error('Error:', error);
     });
