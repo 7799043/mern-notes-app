@@ -47,7 +47,7 @@ export default function ShareNote() {
         setSharedUsers([user]);
       }
     }
-  };  
+  };
 
   const removeSharedUser = user => {
     const updatedUsers = sharedUsers.filter(u => u !== user);
@@ -71,9 +71,13 @@ export default function ShareNote() {
           headers: { Authorization: token }
         });
 
+        window.alert('Note shared.');
+
         return history('/');
       }
     } catch (err) {
+
+      window.alert('Note is not share.');
       window.location.href = '/';
     }
   };
