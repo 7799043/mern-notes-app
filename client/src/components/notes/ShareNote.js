@@ -41,9 +41,13 @@ export default function ShareNote() {
   const addSharedUser = () => {
     const user = prompt('Enter user name');
     if (user) {
-      setSharedUsers([...sharedUsers, user]);
+      if (Array.isArray(sharedUsers)) {
+        setSharedUsers([...sharedUsers, user]);
+      } else {
+        setSharedUsers([user]);
+      }
     }
-  };
+  };  
 
   const removeSharedUser = user => {
     const updatedUsers = sharedUsers.filter(u => u !== user);
