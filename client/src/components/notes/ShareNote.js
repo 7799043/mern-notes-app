@@ -44,22 +44,6 @@ export default function ShareNote() {
     }
   };
 
-  // const addSharedUser = () => {
-  //   const user = prompt('Enter user name');
-  //   if (user) {
-  //     if (Array.isArray(sharedUsers)) {
-  //       setSharedUsers([...sharedUsers, user]);
-  //     } else {
-  //       setSharedUsers([user]);
-  //     }
-  //   }
-  // };
-
-  // const removeSharedUser = user => {
-  //   const updatedUsers = sharedUsers.filter(u => u !== user);
-  //   setSharedUsers(updatedUsers);
-  // };
-
   const shareNote = async e => {
     e.preventDefault();
     try {
@@ -73,18 +57,23 @@ export default function ShareNote() {
           sharedUsers,
           targetUser
         };
-
-        await axios.post(`/api/notes/`, newNote, {
+  
+        const response = await axios.post(`/api/notes/:id`, newNote, {
           headers: { Authorization: token }
         });
-
-        window.alert('Note shared.');
-
+  
+        if (response.status === 200) {
+          window.alert('Note shared. User exists in the database.');
+        } else if (response.status === 404) {
+          window.alert('Note was not shared. User does not exist in the database.');
+        } else {
+          window.alert('Note was not shared. An error occurred.');
+        }
+  
         return history('/');
       }
     } catch (err) {
-
-      window.alert('Note is not share.');
+      window.alert('Note was not shared. An error occurred.');
       window.location.href = '/';
     }
   };
@@ -121,19 +110,6 @@ export default function ShareNote() {
         </div>
 
         <label >Date: {note.date} </label>
-
-        {/* <div className="shared-users">
-          <label htmlFor="shared-users">Shared Users:</label>
-          <ul>
-            {sharedUsers && sharedUsers.map(user => (
-              <li key={user}>
-                {user}
-                <button onClick={() => removeSharedUser(user)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-          <button type="button" onClick={addSharedUser}>Add User</button>
-        </div> */}
         
         <div className="row">
           <label htmlFor="targetUser">Target User</label>

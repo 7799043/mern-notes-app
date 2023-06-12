@@ -1,13 +1,14 @@
 const Users = require('../models/userModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { json } = require('express');
 const jwt = require('jsonwebtoken')
 
 const userCtrl = {
-    registerUser: async (req, res) =>{
+    registerUser: async (req, res) => {
         try {
-            const {username, email, password} = req.body;
-            const user = await Users.findOne({email: email})
-            if(user) return res.status(400).json({msg: "The email already exists."})
+            const { username, email, password } = req.body;
+            const user = await Users.findOne({ email: email })
+            if (user) return res.status(400).json({ msg: "The email already exists." })
 
             const passwordHash = await bcrypt.hash(password, 10)
             const newUser = new Users({
@@ -16,47 +17,63 @@ const userCtrl = {
                 password: passwordHash
             })
             await newUser.save()
-            res.json({msg: "Sign up Success"})
+            res.json({ msg: "Sign up Success" })
         } catch (err) {
-            return res.status(500).json({msg: err.message})
+            return res.status(500).json({ msg: err.message })
         }
     },
-    loginUser: async (req, res) =>{
+    loginUser: async (req, res) => {
         try {
-            const {email, password} = req.body;
-            const user = await Users.findOne({email: email})
-            if(!user) return res.status(400).json({msg: "User does not exist."})
+            const { email, password } = req.body;
+            const user = await Users.findOne({ email: email })
+            if (!user) return res.status(400).json({ msg: "User does not exist." })
 
             const isMatch = await bcrypt.compare(password, user.password)
-            if(!isMatch) return res.status(400).json({msg: "Incorrect password."})
+            if (!isMatch) return res.status(400).json({ msg: "Incorrect password." })
 
             // if login success create token
-            const payload = {id: user._id, name: user.username}
-            const token = jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: "1d"})
+            const payload = { id: user._id, name: user.username }
+            const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "1d" })
 
-            res.json({token})
+            res.json({ token })
         } catch (err) {
-            return res.status(500).json({msg: err.message})
+            return res.status(500).json({ msg: err.message })
         }
     },
-    verifiedToken: (req, res) =>{
+    verifiedToken: (req, res) => {
         try {
             const token = req.header("Authorization")
-            if(!token) return res.send(false)
+            if (!token) return res.send(false)
 
-            jwt.verify(token, process.env.TOKEN_SECRET, async (err, verified) =>{
-                if(err) return res.send(false)
+            jwt.verify(token, process.env.TOKEN_SECRET, async (err, verified) => {
+                if (err) return res.send(false)
 
                 const user = await Users.findById(verified.id)
-                if(!user) return res.send(false)
+                if (!user) return res.send(false)
 
                 return res.send(true)
             })
         } catch (err) {
-            return res.status(500).json({msg: err.message})
+            return res.status(500).json({ msg: err.message })
         }
-    } 
-}
+    },
+
+    userFind: async (req, res) => {
+        try {
+          const { targetUser } = req.body;
+          const user = await Users.findOne({ name: targetUser });
+          if (user) {
+            return res.status(200).json({ msg: 'User exists in the database.' });
+          } else {
+            return res.status(404).json({ msg: 'User does not exist in the database.' });
+          }
+        } catch (error) {
+          console.error(error);
+          return res.status(500).json({ msg: 'Internal server error.' });
+        }
+      }
+      
+}   
 
 
 module.exports = userCtrl
