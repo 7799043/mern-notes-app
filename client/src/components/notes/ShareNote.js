@@ -75,7 +75,7 @@ export default function ShareNote() {
   };
 
   return (
-    <div className="share-note">
+    <div className="create-note">
       <h2>Share Note</h2>
       <form onSubmit={shareNote} autoComplete="off">
         <div className="row">
