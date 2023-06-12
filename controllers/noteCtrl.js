@@ -56,15 +56,16 @@ const noteCtrl = {
     },
 
     shareNote: async (req, res) => {
-        try {
-            const { title, content, date, sharedUsers, targetUser } = req.body;
-            const newNote = {
-                title,
-                content,
-                date,
-                sharedUsers,
-                user: targetUser
-            };
+            try {
+                const { title, content, date, sharedUsers, targetUser } = req.body;
+                const newNote = new Notes({
+                    title,
+                    content,
+                    date,
+                    sharedUsers,
+                    name: targetUser
+                })
+                await newNote.save()
 
             res.status(200).json({ message: 'Note shared successfully.' });
         } catch (err) {

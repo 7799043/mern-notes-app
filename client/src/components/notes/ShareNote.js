@@ -44,21 +44,21 @@ export default function ShareNote() {
     }
   };
 
-  const addSharedUser = () => {
-    const user = prompt('Enter user name');
-    if (user) {
-      if (Array.isArray(sharedUsers)) {
-        setSharedUsers([...sharedUsers, user]);
-      } else {
-        setSharedUsers([user]);
-      }
-    }
-  };
+  // const addSharedUser = () => {
+  //   const user = prompt('Enter user name');
+  //   if (user) {
+  //     if (Array.isArray(sharedUsers)) {
+  //       setSharedUsers([...sharedUsers, user]);
+  //     } else {
+  //       setSharedUsers([user]);
+  //     }
+  //   }
+  // };
 
-  const removeSharedUser = user => {
-    const updatedUsers = sharedUsers.filter(u => u !== user);
-    setSharedUsers(updatedUsers);
-  };
+  // const removeSharedUser = user => {
+  //   const updatedUsers = sharedUsers.filter(u => u !== user);
+  //   setSharedUsers(updatedUsers);
+  // };
 
   const shareNote = async e => {
     e.preventDefault();
@@ -122,7 +122,7 @@ export default function ShareNote() {
 
         <label >Date: {note.date} </label>
 
-        <div className="shared-users">
+        {/* <div className="shared-users">
           <label htmlFor="shared-users">Shared Users:</label>
           <ul>
             {sharedUsers && sharedUsers.map(user => (
@@ -133,7 +133,8 @@ export default function ShareNote() {
             ))}
           </ul>
           <button type="button" onClick={addSharedUser}>Add User</button>
-        </div>
+        </div> */}
+        
         <div className="row">
           <label htmlFor="targetUser">Target User</label>
           <input
