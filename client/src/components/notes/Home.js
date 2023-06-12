@@ -51,6 +51,11 @@ export default function Home() {
                         </div>
                         <button className="close" 
                         onClick={() => deleteNote(note._id)} >X</button>
+                        <div className="share">
+                            {note.name}
+                            <Link to={`share/${note._id}`} >Share note</Link>
+                        </div>
+                        
                     </div>
                 ))
             }
