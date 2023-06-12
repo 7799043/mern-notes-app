@@ -10,6 +10,7 @@ export default function ShareNote() {
     id: ''
   });
 
+  const [sharedUsers, setSharedUsers] = useState([]);
   const history = useNavigate();
   const { id } = useParams();
 
@@ -26,6 +27,7 @@ export default function ShareNote() {
           date: new Date(res.data.date).toLocaleDateString(),
           id: res.data._id
         });
+        setSharedUsers(res.data.sharedUsers); // Setting up a list of shared users
       }
     };
     getNote();
@@ -36,7 +38,19 @@ export default function ShareNote() {
     setNote({ ...note, [name]: value });
   };
 
-  const editNote = async e => {
+  const addSharedUser = () => {
+    const user = prompt('Enter user name');
+    if (user) {
+      setSharedUsers([...sharedUsers, user]);
+    }
+  };
+
+  const removeSharedUser = user => {
+    const updatedUsers = sharedUsers.filter(u => u !== user);
+    setSharedUsers(updatedUsers);
+  };
+
+  const shareNote = async e => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('tokenStore');
@@ -45,7 +59,8 @@ export default function ShareNote() {
         const newNote = {
           title,
           content,
-          date
+          date,
+          sharedUsers
         };
 
         await axios.put(`/api/notes/${id}`, newNote, {
@@ -60,9 +75,9 @@ export default function ShareNote() {
   };
 
   return (
-    <div className="create-note">
+    <div className="share-note">
       <h2>Share Note</h2>
-      <form onSubmit={editNote} autoComplete="off">
+      <form onSubmit={shareNote} autoComplete="off">
         <div className="row">
           <label htmlFor="title">Title</label>
           <input
@@ -93,7 +108,20 @@ export default function ShareNote() {
           <input type="date" id="date" name="date" onChange={onChangeInput} />
         </div>
 
-        <button type="submit">Share</button>
+        <div className="shared-users">
+          <label htmlFor="shared-users">Shared Users:</label>
+          <ul>
+            {sharedUsers && sharedUsers.map(user => (
+              <li key={user}>
+                {user}
+                <button onClick={() => removeSharedUser(user)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+          <button type="button" onClick={addSharedUser}>Add User</button>
+        </div>
+
+        <button type="submit">Save</button>
       </form>
     </div>
   );
