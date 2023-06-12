@@ -95,6 +95,7 @@ export default function ShareNote() {
             name="title"
             required
             onChange={onChangeInput}
+            readOnly
           />
         </div>
 
@@ -108,13 +109,12 @@ export default function ShareNote() {
             required
             rows="10"
             onChange={onChangeInput}
+            readOnly
           />
         </div>
 
-        <label htmlFor="date">Date: {note.date} </label>
-        <div className="row">
-          <input type="date" id="date" name="date" onChange={onChangeInput} />
-        </div>
+        <label >Date: {note.date} </label>
+      
 
         <div className="shared-users">
           <label htmlFor="shared-users">Shared Users:</label>
@@ -129,7 +129,7 @@ export default function ShareNote() {
           <button type="button" onClick={addSharedUser}>Add User</button>
         </div>
 
-        <button type="submit">Save</button>
+        <button type="submit">Share</button>
       </form>
     </div>
   );
