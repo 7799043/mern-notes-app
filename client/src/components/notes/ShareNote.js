@@ -11,6 +11,8 @@ export default function ShareNote() {
   });
 
   const [sharedUsers, setSharedUsers] = useState([]);
+  const [targetUser, setTargetUser] = useState('');
+
   const history = useNavigate();
   const { id } = useParams();
 
@@ -35,7 +37,11 @@ export default function ShareNote() {
 
   const onChangeInput = e => {
     const { name, value } = e.target;
-    setNote({ ...note, [name]: value });
+    if (name === 'targetUser') {
+      setTargetUser(value);
+    } else {
+      setNote({ ...note, [name]: value });
+    }
   };
 
   const addSharedUser = () => {
@@ -64,10 +70,11 @@ export default function ShareNote() {
           title,
           content,
           date,
-          sharedUsers
+          sharedUsers,
+          targetUser
         };
 
-        await axios.put(`/api/notes/${id}`, newNote, {
+        await axios.post(`/api/notes/`, newNote, {
           headers: { Authorization: token }
         });
 
@@ -114,7 +121,6 @@ export default function ShareNote() {
         </div>
 
         <label >Date: {note.date} </label>
-      
 
         <div className="shared-users">
           <label htmlFor="shared-users">Shared Users:</label>
@@ -127,6 +133,16 @@ export default function ShareNote() {
             ))}
           </ul>
           <button type="button" onClick={addSharedUser}>Add User</button>
+        </div>
+        <div className="row">
+          <label htmlFor="targetUser">Target User</label>
+          <input
+            type="text"
+            value={targetUser}
+            id="targetUser"
+            name="targetUser"
+            onChange={onChangeInput}
+          />
         </div>
 
         <button type="submit">Share</button>
