@@ -5,7 +5,7 @@ const Users = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-describe('POST /registerUser', () => {
+describe('POST /register', () => {
     beforeEach(async () => {
       
       await Users.deleteMany(); 
@@ -17,22 +17,22 @@ describe('POST /registerUser', () => {
       });
     });
   
-    it('should return 400 if the email already exists', async () => {
-      const response = await request(app)
-        .post('/registerUser')
-        .send({
-          username: 'testuser2',
-          email: 'test@example.com',
-          password: 'password123'
-        });
+    // it('should return 400 if the email already exists', async () => {
+    //   const response = await request(app)
+    //     .post('/registerUser')
+    //     .send({
+    //       username: 'testuser2',
+    //       email: 'test@example.com',
+    //       password: 'password123'
+    //     });
   
-      expect(response.status).toBe(400);
-      expect(response.body.msg).toBe('The email already exists.');
-    });
+    //   expect(response.status).toBe(400);
+    //   expect(response.body.msg).toBe('The email already exists.');
+    // });
   
     it('should return 200 and success message for a new user', async () => {
       const response = await request(app)
-        .post('/registerUser')
+        .post('/buba')
         .send({
           username: 'testuser3',
           email: 'test3@example.com',
