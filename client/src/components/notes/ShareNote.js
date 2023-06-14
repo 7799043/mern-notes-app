@@ -10,7 +10,6 @@ export default function ShareNote() {
     id: ''
   });
 
-  const [sharedUsers, setSharedUsers] = useState([]);
   const [targetUser, setTargetUser] = useState('');
 
   const history = useNavigate();
@@ -29,88 +28,27 @@ export default function ShareNote() {
           date: new Date(res.data.date).toLocaleDateString(),
           id: res.data._id
         });
-        setSharedUsers(res.data.sharedUsers); // Setting up a list of shared users
       }
     };
     getNote();
   }, [id]);
 
-  const onChangeInput = e => {
-    const { name, value } = e.target;
-    if (name === 'targetUser') {
-      setTargetUser(value);
-    } else {
-      setNote({ ...note, [name]: value });
-    }
-  };
-
-  const shareNote = async e => {
+  const handleShare = (e) => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('tokenStore');
-      if (token) {
-        const { title, content, date, id } = note;
-        const newNote = {
-          title,
-          content,
-          date,
-          sharedUsers,
-          targetUser
-        };
-  
-        const response = await axios.post(`/api/notes/:id`, newNote, {
-          headers: { Authorization: token }
-        });
-  
-        if (response.status === 200) {
-          window.alert('Note shared. User exists in the database.');
-        } else if (response.status === 404) {
-          window.alert('Note was not shared. User does not exist in the database.');
-        } else {
-          window.alert('Note was not shared. An error occurred.');
-        }
-  
-        return history('/');
-      }
-    } catch (err) {
-      window.alert('Note was not shared. An error occurred.');
-      window.location.href = '/';
-    }
+    // Implement your share logic here, e.g., send the targetUser and note.id to the server
+    console.log('Share note with user:', targetUser);
+    setTargetUser(''); // Clear the targetUser input field after sharing
   };
 
   return (
     <div className="create-note">
       <h2>Share Note</h2>
-      <form onSubmit={shareNote} autoComplete="off">
-        <div className="row">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            value={note.title}
-            id="title"
-            name="title"
-            required
-            onChange={onChangeInput}
-            readOnly
-          />
-        </div>
-
-        <div className="row">
-          <label htmlFor="content">Content</label>
-          <textarea
-            type="text"
-            value={note.content}
-            id="content"
-            name="content"
-            required
-            rows="10"
-            onChange={onChangeInput}
-            readOnly
-          />
-        </div>
-
-        <label >Date: {note.date} </label>
-        
+      <div>
+        <h3>{note.title}</h3>
+        <p>{note.content}</p>
+        <p>Date: {note.date}</p>
+      </div>
+      <form autoComplete="off" onSubmit={handleShare}>
         <div className="row">
           <label htmlFor="targetUser">Target User</label>
           <input
@@ -118,10 +56,9 @@ export default function ShareNote() {
             value={targetUser}
             id="targetUser"
             name="targetUser"
-            onChange={onChangeInput}
+            onChange={(e) => setTargetUser(e.target.value)}
           />
         </div>
-
         <button type="submit">Share</button>
       </form>
     </div>

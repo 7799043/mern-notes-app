@@ -57,21 +57,6 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-
-    userFind: async (req, res) => {
-        try {
-          const { targetUser } = req.body;
-          const user = await Users.findOne({ name: targetUser });
-          if (user) {
-            return res.status(200).json({ msg: 'User exists in the database.' });
-          } else {
-            return res.status(404).json({ msg: 'User does not exist in the database.' });
-          }
-        } catch (error) {
-          console.error(error);
-          return res.status(500).json({ msg: 'Internal server error.' });
-        }
-      }
       
 }   
 

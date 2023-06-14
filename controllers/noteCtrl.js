@@ -53,26 +53,6 @@ const noteCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-    },
-
-    shareNote: async (req, res) => {
-            try {
-                const { title, content, date, sharedUsers, targetUser } = req.body;
-                const newNote = new Notes({
-                    title,
-                    content,
-                    date,
-                    sharedUsers,
-                    name: targetUser
-                })
-                await newNote.save()
-
-            res.status(200).json({ message: 'Note shared successfully.' });
-        } catch (err) {
-
-            res.status(500).json({ message: 'Failed to share note.' });
-        }
-
     }
 }
 
