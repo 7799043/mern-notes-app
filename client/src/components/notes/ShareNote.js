@@ -35,15 +35,15 @@ export default function ShareNote() {
 
   const handleShare = async (e) => {
     e.preventDefault();
-
     try {
+      
       const token = localStorage.getItem('tokenStore');
       const shareData = {
         targetUser: targetUser,
         noteId: note.id
       };
 
-      const res = await axios.post('/api/share', shareData, {
+      const res = await axios.post('/api/note/share', shareData, {
         headers: { Authorization: token }
       });
 

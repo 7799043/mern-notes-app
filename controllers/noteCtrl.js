@@ -58,13 +58,10 @@ const noteCtrl = {
     shareNote: async (req, res) => {
         try {
             const { targetUser, noteId } = req.body;
-
-
             const note = await Note.findById(noteId);
             if (!note) {
                 return res.status(404).json({ msg: 'Note not found' });
             }
-
             const sharedNote = new Note({
                 title: note.title,
                 content: note.content,
