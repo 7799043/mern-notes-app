@@ -43,7 +43,7 @@ export default function ShareNote() {
         noteId: note.id
       };
 
-      const res = await axios.post('/api/note/share', shareData, {
+      const res = await axios.post('/api/notes/share', shareData, {
         headers: { Authorization: token }
       });
 
