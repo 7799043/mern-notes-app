@@ -17,7 +17,7 @@ const userCtrl = {
                 password: passwordHash
             })
             await newUser.save()
-            res.json({ msg: "Sign up Success" })
+            res.status(200).json({ msg: "Sign up Success" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -57,8 +57,8 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-      
-}   
+
+}
 
 
 module.exports = userCtrl
