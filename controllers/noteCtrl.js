@@ -72,7 +72,7 @@ const noteCtrl = {
             userId: targetUser, 
           });
       
-          const savedNote = await sharedNote.save();
+          await sharedNote.save();
     
           res.status(200).json({ msg: 'Note shared successfully' });
         } catch (err) {
