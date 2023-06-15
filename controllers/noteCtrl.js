@@ -57,31 +57,31 @@ const noteCtrl = {
 
     shareNote: async (req, res) => {
         try {
-          const { targetUser, noteId } = req.body;
-    
-         
-          const note = await Note.findById(noteId);
-          if (!note) {
-            return res.status(404).json({ msg: 'Note not found' });
-          }
-    
-          const sharedNote = new Note({
-            title: note.title,
-            content: note.content,
-            date: note.date,
-            userId: targetUser, 
-          });
-      
-          await sharedNote.save();
-    
-          res.status(200).json({ msg: 'Note shared successfully' });
+            const { targetUser, noteId } = req.body;
+
+
+            const note = await Note.findById(noteId);
+            if (!note) {
+                return res.status(404).json({ msg: 'Note not found' });
+            }
+
+            const sharedNote = new Note({
+                title: note.title,
+                content: note.content,
+                date: note.date,
+                userId: targetUser,
+            });
+
+            await sharedNote.save();
+            res.status(200).json({ msg: 'Note shared successfully' });
+
         } catch (err) {
-          console.error('Error sharing note:', err);
-          res.status(500).json({ error: 'Internal server error' });
+            console.error('Error sharing note:', err);
+            res.status(500).json({ error: 'Internal server error' });
         }
-      },
-    
-    
+    },
+
+
 }
 
 module.exports = noteCtrl
