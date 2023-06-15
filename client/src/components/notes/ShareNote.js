@@ -33,11 +33,25 @@ export default function ShareNote() {
     getNote();
   }, [id]);
 
-  const handleShare = (e) => {
+  const handleShare = async (e) => {
     e.preventDefault();
-    // Implement your share logic here, e.g., send the targetUser and note.id to the server
-    console.log('Share note with user:', targetUser);
-    setTargetUser(''); // Clear the targetUser input field after sharing
+
+    try {
+      const token = localStorage.getItem('tokenStore');
+      const shareData = {
+        targetUser: targetUser,
+        noteId: note.id
+      };
+
+      const res = await axios.post('/api/share', shareData, {
+        headers: { Authorization: token }
+      });
+
+      console.log('Note shared successfully:', res.data);
+      setTargetUser(''); 
+    } catch (error) {
+      console.error('Error sharing note:', error.message);
+    }
   };
 
   return (

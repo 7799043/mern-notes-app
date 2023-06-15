@@ -12,6 +12,8 @@ router.route('/:id')
     .put(auth, noteCtrl.updateNote)
     .delete(auth, noteCtrl.deleteNote)
    
+router.route('/share')
+.post(auth, noteCtrl.shareNote);
 
 
 module.exports = router
