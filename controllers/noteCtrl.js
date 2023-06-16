@@ -68,7 +68,7 @@ const noteCtrl = {
                 date: note.date,
                 userId: targetUser,
                 name: req.user.name, 
-                user_id: req.user.id 
+                user_id: targetUser 
             });
 
             await sharedNote.save();
