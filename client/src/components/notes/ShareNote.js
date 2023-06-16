@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,9 +10,8 @@ export default function ShareNote() {
     id: ''
   });
 
-  const [targetUser, setTargetUser] = useState('');
+  const targetUserRef = useRef('');
 
-  const history = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -37,29 +36,36 @@ export default function ShareNote() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('tokenStore');
-  
+      const targetUser = targetUserRef.current.value;
+
       // Get the target user ID based on the provided username
       const userRes = await axios.get(`/users?username=${targetUser}`, {
         headers: { Authorization: token }
       });
-      const targetUserId = userRes.data[0]._id;
-  
+
+      const targetUserObj = userRes.data.find(user => user.username === targetUser);
+
+      if (!targetUserObj) {
+        console.log('Target user does not exist');
+        return;
+      }
+
       const shareData = {
-        targetUser: targetUserId,
+        targetUser: targetUserObj._id,
         noteId: note.id
       };
-  
+
       const res = await axios.post('/api/notes/share', shareData, {
         headers: { Authorization: token }
       });
-  
+
       console.log('Note shared successfully:', res.data);
-      setTargetUser('');
+      console.log({ targetUserObj });
+      targetUserRef.current.value = '';
     } catch (error) {
       console.error('Error sharing note:', error.message);
     }
   };
-  
 
   return (
     <div className="create-note">
@@ -74,10 +80,9 @@ export default function ShareNote() {
           <label htmlFor="targetUser">Target User</label>
           <input
             type="text"
-            value={targetUser}
+            ref={targetUserRef}
             id="targetUser"
             name="targetUser"
-            onChange={(e) => setTargetUser(e.target.value)}
           />
         </div>
         <button type="submit">Share</button>
