@@ -12,4 +12,7 @@ router.post('/login', userCtrl.loginUser)
 // verify Token
 router.get('/verify', userCtrl.verifiedToken)
 
+// Search Users
+router.get('/', auth, userCtrl.searchUsers);
+
 module.exports = router

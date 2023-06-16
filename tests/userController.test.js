@@ -1,14 +1,14 @@
-// const request = require('supertest');
-// const app = require('../server'); 
-// const userCtrl = require('../controllers/userCtrl'); 
-// const Users = require('../models/userModel'); 
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const request = require('supertest');
+const app = require('../server'); 
+const userCtrl = require('../controllers/userCtrl'); 
+const Users = require('../models/userModel'); 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-// describe('POST /users/register', () => {
-//   // beforeAll(async () => {
-//   //   await Users.deleteMany({});
-//   });
+describe('POST /users/register', () => {
+  // beforeAll(async () => {
+  //   await Users.deleteMany({});
+  });
 //   it('should return 200 and success message if registration is successful', async () => {
 //     const newUser = {
 //       username: 'testuser',
@@ -24,32 +24,31 @@
 //     expect(response.body.msg).toBe('Sign up Success');
 //   });
 
-//   it('should return 400 if email already exists', async () => {
-//     const existingUser = {
-//       username: 'existinguser',
-//       email: 'test@example.com', // Email already exists in the database
-//       password: 'testpassword',
-//     };
+  it('should return 400 if email already exists', async () => {
+    const existingUser = {
+      username: 'existinguser',
+      email: 'test@example.com', // Email already exists in the database
+      password: 'testpassword',
+    };
 
-//     const response = await request(app)
-//       .post('/users/register')
-//       .send(existingUser);
+    const response = await request(app)
+      .post('/users/register')
+      .send(existingUser);
 
-//     expect(response.statusCode).toBe(400);
-//     expect(response.body.msg).toBe('The email already exists.');
-//   });
+    expect(response.statusCode).toBe(400);
+    expect(response.body.msg).toBe('The email already exists.');
+  });
 
-//   it('should return 500 if an error occurs during registration', async () => {
-//     const invalidUser = {
-//       // Invalid user object without required fields
-//     };
+  it('should return 500 if an error occurs during registration', async () => {
+    const invalidUser = {
+      // Invalid user object without required fields
+    };
 
 
-//     const response = await request(app)
-//       .post('/users/register')
-//       .send(invalidUser);
+    const response = await request(app)
+      .post('/users/register')
+      .send(invalidUser);
 
-//     expect(response.statusCode).toBe(500);
-//     expect(response.body.msg).toBeDefined();
-//   });
-// });
+    expect(response.statusCode).toBe(500);
+    expect(response.body.msg).toBeDefined();
+  });

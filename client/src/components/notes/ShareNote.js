@@ -36,23 +36,30 @@ export default function ShareNote() {
   const handleShare = async (e) => {
     e.preventDefault();
     try {
-      
       const token = localStorage.getItem('tokenStore');
+  
+      // Get the target user ID based on the provided username
+      const userRes = await axios.get(`/users?username=${targetUser}`, {
+        headers: { Authorization: token }
+      });
+      const targetUserId = userRes.data[0]._id;
+  
       const shareData = {
-        targetUser: targetUser,
+        targetUser: targetUserId,
         noteId: note.id
       };
-
+  
       const res = await axios.post('/api/notes/share', shareData, {
         headers: { Authorization: token }
       });
-
+  
       console.log('Note shared successfully:', res.data);
-      setTargetUser(''); 
+      setTargetUser('');
     } catch (error) {
       console.error('Error sharing note:', error.message);
     }
   };
+  
 
   return (
     <div className="create-note">
