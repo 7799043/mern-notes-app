@@ -49,6 +49,7 @@ export default function Home() {
                             <div>
                                 {note.name}
                                 <Link to={`edit/${note._id}`} >Edit</Link>
+                                
                             </div>
                             <div className="share">
                                 <Link to={`share/${note._id}`} >Share</Link>
