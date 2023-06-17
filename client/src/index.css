@@ -14,15 +14,17 @@ code {
     monospace;
 }
 
-body{
-  background: rgb(63,9,63);
+body {
+  background: #f5f5f5; /* Light gray background */
 }
-.notes-page{
+
+.notes-page {
   width: 100%;
   min-height: 100vh;
-  color: whitesmoke;
+  color: #333; /* Dark gray text color */
 }
-.notes-page header{
+
+.notes-page header {
   max-width: 1920px;
   min-height: 100px;
   overflow: hidden;
@@ -32,168 +34,225 @@ body{
   justify-content: space-around;
   align-items: center;
 }
-a{
+
+a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #333; /* Dark gray link color */
 }
-.notes-page header .logo{
+
+.notes-page header .logo {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-.notes-page header ul li{
+
+.notes-page header ul {
   list-style: none;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notes-page header ul li {
   padding: 0 15px;
 }
-.notes-page header ul li a{
+
+.notes-page header ul li a {
   text-transform: uppercase;
   opacity: 0.7;
 }
-.notes-page header ul li a:hover{
+
+.notes-page header ul li a:hover {
   opacity: 1;
 }
-.notes-page section{
+
+.notes-page section {
   width: 100%;
-  box-shadow: 0 0 5px rgb(7,25,63);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Light gray box shadow */
   padding: 20px 0;
 }
-.note-wrapper{
+
+.note-wrapper {
   max-width: 1920px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin: auto;
 }
-.card{
+
+.card {
   width: 300px;
-  box-shadow: 0 0 5px rgb(7,25,63);
-  background: rgb(7,25,63);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Light gray box shadow */
+  background: #f5f5f5; /* Light gray background */
   padding: 10px;
   position: relative;
-  color: #ddd;
+  color: #333; /* Dark gray text color */
   margin: 15px;
   cursor: pointer;
+  border: 2px solid #ccc; /* Light gray border */
+  transition: transform 0.2s ease-in-out;
 }
-.card .close{
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .close {
   position: absolute;
-  top:0;
+  top: 0;
   right: 10px;
   font-weight: 900;
   cursor: pointer;
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: #333; /* Dark gray text color */
 }
-.card h4{
+
+.card h4 {
   margin-right: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.card .text-wrapper{
-  width: 100%;
+
+.card .text-wrapper {
   height: 150px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 7;
   overflow: hidden;
   margin: 10px 0;
-  color: #fff9;
+  color: #555; /* Medium gray text color */
 }
-.card .date{
+
+.card .date {
   text-align: right;
-  color: wheat;
+  color: #888; /* Light gray text color */
 }
-.card-footer{
+
+.card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   height: 50px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 12px;
+  border-top: 1px solid #ccc; /* Light gray top border */
+  padding-top: 10px;
 }
-/* ******* Create Note******************* */
-.create-note{
+
+.create-note {
   max-width: 500px;
   width: 100%;
   margin: auto;
-  border: 10px solid #ccc;
+  border: 2px solid #ccc; /* Light gray border */
   padding: 30px;
+  background: #f5f5f5; /* Light gray background */
 }
-.create-note h2{
+
+.create-note h2 {
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 10px 0;
+  color: #333; /* Dark gray text color */
 }
-.create-note .row{
-  width: 100%;
+
+.create-note .row {
   margin: 10px 0;
 }
+
 .create-note input,
-.create-note button{
+.create-note button {
   width: 100%;
   height: 40px;
-  padding:  0 5px;
+  padding: 0 5px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
 }
-.create-note label{
+
+.create-note label {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 2px;
+  color: #333; /* Dark gray text color */
 }
-.create-note textarea{
+
+.create-note textarea {
   width: 100%;
+  height: 100px;
   resize: none;
-  padding: 0 5px;
+  padding: 5px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
 }
-.create-note button{
+
+.create-note button {
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 2px;
-  color: rgb(7,25,63);
+  color: #333; /* Dark gray text color */
+  background: #f5f5f5; /* Light gray background */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
 }
-@media (max-width: 500px){
-  .create-note{
+
+.create-note button:hover {
+  background-color: #ccc; /* Light gray hover background */
+}
+
+@media (max-width: 500px) {
+  .create-note {
     padding: 15px;
-    border: 5px solid #ccc;
+    border: 1px solid #ccc; /* Light gray border */
   }
 }
 
-/* *********Login / Register******* */
-.login-page{
+.login-page {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  background: #f5f5f5; /* Light gray background */
 }
+
 .login input,
-.register input{
+.register input {
   margin-bottom: 15px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
+  padding: 5px;
 }
+
 .login,
-.register{
+.register {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgb(63,9,63);
+  background: #fff; /* White background */
+  border: 2px solid #ccc; /* Light gray border */
+  padding: 20px;
 }
+
 .login-page h2,
-.login-page h3{
-  color: #fff8;
+.login-page h3 {
+  color: #333; /* Dark gray text color */
 }
-.login-page h3{
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: 15px;
+
+.login-page h3 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 15px;
 }
-.login-page p{
+
+.login-page p {
   margin: 10px 0;
-  color: white;
+  color: #333; /* Dark gray text color */
 }
-.login-page span:hover{
+
+.login-page span:hover {
   color: orange;
   cursor: pointer;
 }
