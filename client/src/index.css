@@ -40,6 +40,12 @@ a {
   color: #333; /* Dark gray link color */
 }
 
+a:hover {
+  color: orange; 
+  text-decoration: none; 
+  transition: color 0.2s ease-in-out; 
+}
+
 .notes-page header .logo {
   text-transform: uppercase;
   letter-spacing: 2px;
