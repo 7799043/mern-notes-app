@@ -112,6 +112,12 @@ a:hover {
   border: none;
   outline: none;
   color: #333; /* Dark gray text color */
+  font-size: 20px; /* Increase the font size to make it slightly larger */
+  transition: color 0.3s ease; /* Add a smooth transition for the color change */
+}
+
+.card .close:hover {
+  color: #ff0000; /* Change the color to red (#ff0000) on hover */
 }
 
 .card h4 {
@@ -138,7 +144,7 @@ a:hover {
 
 .card-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Align content to the ends */
   align-items: center;
   height: 50px;
   text-transform: uppercase;
@@ -148,16 +154,42 @@ a:hover {
   padding-top: 10px;
 }
 
-.share {
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  height: 50px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 12px;
-  padding-top: 10px;
+.note-name {
+  margin-right: auto; /* Pushes the element to the left */
 }
+
+.share,
+.edit {
+  margin-left: 10px; /* Add space between buttons */
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.share a,
+.edit a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.share:hover,
+.edit:hover {
+  text-decoration: underline;
+}
+
+.share:hover a {
+  color: #1c70b6; /* Blue shade (#1c70b6) */
+}
+
+.edit:hover a {
+  color: #2fae66; /* Green shade (#2fae66) */
+}
+
 
 
 .create-note {
@@ -233,6 +265,17 @@ a:hover {
   width: 100%;
   min-height: 100vh;
   background: #f5f5f5; /* Light gray background */
+}
+
+.login-name {
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 15px;
+  padding-top: 50px;
+  color: #333; 
+  font-size: 24px; 
+  font-weight: bold; 
 }
 
 .login input,

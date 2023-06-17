@@ -49,6 +49,9 @@ export default function Login({setIsLogin}) {
 
     return (
        <section className="login-page">
+        <div className="login-name">
+            <h1>My Note Book</h1>
+            </div>
            <div className="login create-note">
                 <h2>Login</h2>
                 <form onSubmit={loginSubmit}>

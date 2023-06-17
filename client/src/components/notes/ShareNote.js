@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 
 export default function ShareNote() {
   const [note, setNote] = useState({
@@ -9,7 +9,7 @@ export default function ShareNote() {
     date: '',
     id: ''
   });
-
+  const navigate = useNavigate()
   const targetUserRef = useRef('');
 
   const { id } = useParams();
@@ -61,7 +61,9 @@ export default function ShareNote() {
 
       console.log('Note shared successfully:', res.data);
       console.log({ targetUserObj });
+      window.alert('Note shared successfully');
       targetUserRef.current.value = '';
+      navigate('/');
     } catch (error) {
       console.error('Error sharing note:', error.message);
     }
