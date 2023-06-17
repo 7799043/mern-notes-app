@@ -148,6 +148,18 @@ a:hover {
   padding-top: 10px;
 }
 
+.share {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  height: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+
 .create-note {
   max-width: 500px;
   width: 100%;
