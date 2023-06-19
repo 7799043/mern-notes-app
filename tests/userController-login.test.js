@@ -7,9 +7,7 @@ const jwt = require('jsonwebtoken');
 
 
   describe('POST /users/login', () => {
-    afterAll(async () => {
-      await connection.close();
-    });
+    
 
     it('should return token if login is successful', async () => {
       const credentials = {
