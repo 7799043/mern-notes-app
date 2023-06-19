@@ -5,19 +5,19 @@ const Users = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+let connection;
+
+afterAll(async () => {
+  await connection.close();
+});
+
+
   describe('POST /users/login', () => {
-    beforeAll(async () => {
-      await Users.deleteMany({});
-      const passwordHash = await bcrypt.hash('testpassword', 10);
-      const user = new Users({
-        username: 'testuser',
-        email: 'test@example.com',
-        password: passwordHash
-      });
-      await user.save();
+    afterAll(async () => {
+      await connection.close();
     });
 
-    it('should return 200 and a token if login is successful', async () => {
+    it('should return token if login is successful', async () => {
       const credentials = {
         email: 'test@example.com',
         password: 'testpassword'
@@ -31,7 +31,7 @@ const jwt = require('jsonwebtoken');
       expect(response.body.token).toBeDefined();
     });
 
-    it('should return 400 if user does not exist', async () => {
+    it('should return error if user does not exist', async () => {
       const invalidCredentials = {
         email: 'nonexistent@example.com',
         password: 'testpassword'
@@ -45,7 +45,7 @@ const jwt = require('jsonwebtoken');
       expect(response.body.msg).toBe('User does not exist.');
     });
 
-    it('should return 400 if password is incorrect', async () => {
+    it('should return error if password is incorrect', async () => {
       const incorrectPassword = {
         email: 'test@example.com',
         password: 'incorrectpassword'
@@ -59,15 +59,18 @@ const jwt = require('jsonwebtoken');
       expect(response.body.msg).toBe('Incorrect password.');
     });
 
-    it('should return 500 if an error occurs during login', async () => {
+    it('should return error date base if an error occurs during login', async () => {
       const invalidData = {
-        
+        email: 'test@example.com',
+        password: 'passwordHash'
       };
-
+    
+      jest.spyOn(Users, 'findOne').mockRejectedValueOnce(new Error('Database error'));
+    
       const response = await request(app)
         .post('/users/login')
         .send(invalidData);
-
+    
       expect(response.statusCode).toBe(500);
       expect(response.body.msg).toBeDefined();
     });

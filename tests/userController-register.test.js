@@ -6,11 +6,25 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+let connection;
+
+afterAll(async () => {
+  await connection.close();
+});
+
+
+
+
   describe('POST /users/register', () => {
     beforeAll(async () => {
       await Users.deleteMany({});
     });
-    it('should return 200 and success message if registration is successful', async () => {
+
+    afterAll(async () => {
+      await connection.close();
+    });
+
+    it('should return success message if registration is successful', async () => {
       const newUser = {
         username: 'testuser',
         email: 'test@example.com',
@@ -25,7 +39,7 @@ const jwt = require('jsonwebtoken');
       expect(response.body.msg).toBe('Sign up Success');
     });
 
-    it('should return 400 if email already exists', async () => {
+    it('should return error if email already exists', async () => {
       const existingUser = {
         username: 'existinguser',
         email: 'test@example.com', // Email already exists in the database
@@ -40,7 +54,7 @@ const jwt = require('jsonwebtoken');
       expect(response.body.msg).toBe('The email already exists.');
     });
 
-    it('should return 500 if an error occurs during registration', async () => {
+    it('should return error if an error occurs during registration', async () => {
       const invalidUser = {
         // Invalid user object without required fields
       };
