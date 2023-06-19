@@ -5,12 +5,6 @@ const Users = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-let connection;
-
-afterAll(async () => {
-  await connection.close();
-});
-
 
   describe('POST /users/login', () => {
     afterAll(async () => {

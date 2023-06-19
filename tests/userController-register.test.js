@@ -6,22 +6,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-let connection;
-
-afterAll(async () => {
-  await connection.close();
-});
-
-
-
-
   describe('POST /users/register', () => {
     beforeAll(async () => {
       await Users.deleteMany({});
-    });
-
-    afterAll(async () => {
-      await connection.close();
     });
 
     it('should return success message if registration is successful', async () => {
