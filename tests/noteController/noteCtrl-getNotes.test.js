@@ -29,6 +29,7 @@ describe('GET /api/notes', () => {
             .set('Authorization', `Bearer ${userToken}`);
 
 
-            expect(response.body).toBeDefined();
+        expect(response.statusCode).toBe(400);
+        expect(response.body).not.toBe(undefined);
     })
 })
