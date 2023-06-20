@@ -22,11 +22,9 @@ describe('GET /api/notes', () => {
     });
 
     it('should return all notes for a user', async () => {
-        const userToken = jwt.sign({ id: 'user1' }, 'smacznejkawusi007');
 
         const response = await request(app)
             .get('/api/notes')
-            .set('Authorization', `Bearer ${userToken}`);
 
 
         expect(response.statusCode).toBe(400);
