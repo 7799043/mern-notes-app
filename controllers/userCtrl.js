@@ -56,15 +56,6 @@ const userCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-    },
-    searchUsers: async (req, res) => {
-        try {
-            const { username } = req.query;
-            const users = await Users.find({ username: { $regex: username, $options: 'i' } });
-            res.json(users);
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
     }
 };
 
