@@ -22,7 +22,7 @@ describe('Note API', () => {
       .send({ email: 'test@example.com', password: 'testpassword' });
 
 
-    // Pobierz token z odpowiedzi logowania
+    // Here token from verify 
     const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkNDgyYWQ1YzBkMjRmNWFhZTcwNyIsIm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NzM0NDY1MiwiZXhwIjoxNjg3NDMxMDUyfQ.Zy7yu2C-PxFGsAQ_-c7Pocadh6UtZgw-XonHdeHu-u8';
     // console.log(validToken);
     //  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJjNTNjMTM2OThhNDFkMWY2NzY3YiIsIm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NzM0NDA5OSwiZXhwIjoxNjg3NDMwNDk5fQ.RJD-0samgbyIU9rgI1zJy6P1xljT936YD2M0x8Ea-Kg
