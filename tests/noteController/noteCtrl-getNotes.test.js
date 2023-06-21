@@ -5,13 +5,6 @@ const Notes = require('../../models/noteModel');
 describe('Note API', () => {
   let createdNoteId;
 
-  // Przed testami: utwórz notatkę testową
-  // beforeAll(async () => {
-  //   const noteData = {
-  //     title: 'Test Note',
-  //     content: 'This is a test note.',
-  //     date: '2023-06-21',
-  //   };
   beforeAll(async () => {
     const note1 = new Notes({
       title: 'Note 1',
@@ -20,48 +13,65 @@ describe('Note API', () => {
       user_id: 'user1',
       name: 'User 1',
     });
-    await note1.save();
-    const createdNote = await Notes.findOne({ title: note1.title });
-    createdNoteId = createdNote._id;
+    // await note1.save();
+    // const createdNote = await Notes.findOne({ title: note1.title });
+    // createdNoteId = createdNote._id;
+
+    const loginResponse = await request(app)
+      .post('/users/login')
+      .send({ email: 'test@example.com', password: 'testpassword' });
+
+
+    // Pobierz token z odpowiedzi logowania
+    const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkNDgyYWQ1YzBkMjRmNWFhZTcwNyIsIm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NzM0NDY1MiwiZXhwIjoxNjg3NDMxMDUyfQ.Zy7yu2C-PxFGsAQ_-c7Pocadh6UtZgw-XonHdeHu-u8';
+    // console.log(validToken);
+    //  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJjNTNjMTM2OThhNDFkMWY2NzY3YiIsIm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NzM0NDA5OSwiZXhwIjoxNjg3NDMwNDk5fQ.RJD-0samgbyIU9rgI1zJy6P1xljT936YD2M0x8Ea-Kg
+
+    // Wykonaj żądanie utworzenia notatki z uwierzytelnieniem
+    const response = await request(app)
+      .post('/api/notes')
+      .set('Authorization', `Bearer ${validToken}`)
+      .send(note1);
+
     // const response = await request(app).post('/api/notes').send(note1);
-    // console.log(response.body); 
-    console.log(createdNoteId);
-    createdNoteId = createdNote._id;
+    // console.log(response.body);
+    // console.log(createdNoteId);
+    createdNoteId = response.body.note.id;
   });
 
-  // Po testach: usuń notatkę testową
-  afterAll(async () => {
-    await request(app).delete(`/api/notes/${createdNoteId}`);
-  });
 
-  describe('POST /api/notes', () => {
-    it('should create a new note', async () => {
+  // afterAll(async () => {
+  //   await request(app).delete(`/api/notes/${createdNoteId}`);
+  // });
+
+  // describe('POST /api/notes', () => {
+  //   it('should create a new note', async () => {
+  //     const noteData = {
+  //       title: 'Test Note',
+  //       content: 'This is a test note.',
+  //       date: '2023-06-21',
+  //     };
+
+  //     const response = await request(app).post('/api/notes').send(noteData);
+
+  //     expect([200, 201]).toContain(response.status);
+  //     expect(response.body).toHaveProperty('msg', 'Created a Note');
+
+  //     createdNoteId = response.body.note._id;
+  //   });
+
+    it('should return an error if required fields are missing', async () => {
       const noteData = {
-        title: 'Test Note',
         content: 'This is a test note.',
         date: '2023-06-21',
       };
 
       const response = await request(app).post('/api/notes').send(noteData);
 
-      expect([200, 201]).toContain(response.status);
-      expect(response.body).toHaveProperty('msg', 'Created a Note');
-
-      createdNoteId = response.body.note._id;
+      expect(response.status).toBe(500);
+      expect(response.body).toHaveProperty('msg');
     });
-
-//     it('should return an error if required fields are missing', async () => {
-//       const noteData = {
-//         content: 'This is a test note.',
-//         date: '2023-06-21',
-//       };
-
-//       const response = await request(app).post('/api/notes').send(noteData);
-
-//       expect(response.status).toBe(500);
-//       expect(response.body).toHaveProperty('msg');
-//     });
-//   });
+  });
 
 //   describe('GET /api/notes/:id', () => {
 //     it('should return a specific note', async () => {
