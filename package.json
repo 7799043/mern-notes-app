@@ -4,7 +4,7 @@
   "description": "The main purpose of this repo is move notes app(https://github.com/7799043/notes-app) to MERN technology: MongoDB - Express.js - React - Node.js.",
   "main": "server.js",
   "scripts": {
-    "test": "jest --testEnvironment=node",
+    "test": "jest --testEnvironment=node --watchAll=false",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
