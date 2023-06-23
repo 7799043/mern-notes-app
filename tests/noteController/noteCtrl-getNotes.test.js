@@ -1,10 +1,10 @@
 const request = require('supertest');
 const app = require('../../server');
 const Notes = require('../../models/noteModel');
-
+const jwt = require('jsonwebtoken')
 
 // DEPSITE VALID TOKEN I CANT ACCESS TO NOTE
-
+// EVEN IF I DECODED TOKEN I CANT GET ID.......
 
 describe('Note API', () => {
   let createdNoteId;
@@ -15,7 +15,7 @@ describe('Note API', () => {
       content: 'Lorem ipsum dolor sit amet',
       date: Date.now(),
       user_id: 'user1',
-      name: 'User 1',
+      name: 'testuser',
     });
     // await note1.save();
     // const createdNote = await Notes.findOne({ title: note1.title });
@@ -29,7 +29,9 @@ describe('Note API', () => {
     // Here token from verify 
     const validToken = loginResponse.body.token;
     console.log(validToken);
-   
+    const decodedToken = jwt.decode(validToken);
+    console.log(decodedToken);
+
 
     const response = await request(app)
       .post('/api/notes')
@@ -63,18 +65,18 @@ describe('Note API', () => {
   //     createdNoteId = response.body.note._id;
   //   });
 
-    it('should return an error if required fields are missing', async () => {
-      const noteData = {
-        content: 'This is a test note.',
-        date: '2023-06-21',
-      };
+  it('should return an error if required fields are missing', async () => {
+    const noteData = {
+      content: 'This is a test note.',
+      date: '2023-06-21',
+    };
 
-      const response = await request(app).post('/api/notes').send(noteData);
+    const response = await request(app).post('/api/notes').send(noteData);
 
-      expect(response.status).toBe(500);
-      expect(response.body).toHaveProperty('msg');
-    });
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty('msg');
   });
+});
 
 //   describe('GET /api/notes/:id', () => {
 //     it('should return a specific note', async () => {
