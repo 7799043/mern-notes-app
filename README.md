@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+## Notes App 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>Main purpose of MERN Notes App is move previous project (https://github.com/maciejleoniak/notes-app) to more advance technology (MongoDB - Express.js - React - Node.js = MERN). Purpose is reached. Moreover our notes are more safer than previous. MERN Notes App uses authorisation token during log-in and crypto technology to keep in secret our passwords.
+I missed in previous version by notes share option. It is past because it is now available so we can exchange by notes!</p>
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+1. Open the console or terminal on your local machine.
+2. Clone this repository to your local machine using console:
+```sh
+git clone https://github.com/maciejleoniak/mern-notes-app.git
+```
+3. Go to the repository directory:
+```sh
+cd mern-notes-app
+```
+4. Make sure you have Node.js installed on your machine. You can check it by the following command:
+ ```sh 
+ node -v 
+ ``` 
+ or you can download the Node.js installer from the official Node.js website (https://nodejs.org) and follow the installation instructions for your specific operating system.
 
-### `npm start`
+5. Install the server dependencies using the following command:
+ ```sh
+npm install
+```
+6. Go to the client directory:
+```sh
+cd client
+```
+7. Install the client dependencies using the following command:
+ ```sh
+npm install
+```
+8. Now you can run the server in main folder by ```npm run dev``` and run client in client folder by ``` npm start```
+This command will start a development server hosting at http://localhost:5000. By default, the application will be available at http://localhost:3000 in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+7. Connect to an existing MongoDB cluster or create a new one.
+<p>The Notes application might require a connection to a MongoDB database to store and retrieve data. Ensure you have an existing MongoDB cluster that you can connect to, or follow the MongoDB documentation (https://docs.mongodb.com) to create a new cluster based on your needs. Once you have the connection details (such as the connection URL), you may need to update the application's configuration to establish the connection with MongoDB.</p>
