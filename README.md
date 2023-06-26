@@ -35,5 +35,25 @@ npm install
 8. Now you can run the server in main folder by ```npm run dev``` and run client in client folder by ``` npm start```
 This command will start a development server hosting at http://localhost:5000. By default, the application will be available at http://localhost:3000 in your browser.
 
-7. Connect to an existing MongoDB cluster or create a new one.
+9. Connect to an existing MongoDB cluster or create a new one.
 <p>The Notes application might require a connection to a MongoDB database to store and retrieve data. Ensure you have an existing MongoDB cluster that you can connect to, or follow the MongoDB documentation (https://docs.mongodb.com) to create a new cluster based on your needs. Once you have the connection details (such as the connection URL), you may need to update the application's configuration to establish the connection with MongoDB.</p>
+
+## Tests
+
+1. To run all tests following command:
+ ```sh
+npm run test
+```
+1. To run tests one-by-one following command:
+```sh
+npm run test1
+```
+Where the number corresponds to the test file. At this point, the available tests are :
+
+ ```sh
+1 - userController - login endpoint
+2 - userController - register endpoint
+3 - userController - verified token endpoint
+```
+
+
