@@ -56,4 +56,5 @@ Where the number corresponds to the test file. At this point, the available test
 3 - userController - verified token endpoint
 ```
 
-
+## Quick preview of app work
+[![Quick preview of app work](https://img.youtube.com/vi/zJU08IO2kI4/0.jpg)](https://www.youtube.com/watch?v=zJU08IO2kI4)
