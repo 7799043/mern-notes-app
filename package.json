@@ -5,6 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --testEnvironment=node --runInBand",
+    "test1": "jest tests/userController/userController-register.test.js",
+    "test2": "jest tests/userController/userController-login.test.js",
+    "test3": "jest tests/userController/userController-verifiedToken.test.js",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
